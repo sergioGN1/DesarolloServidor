@@ -7,9 +7,4 @@ userDB: oscarnovillo
 passDB: c557ef
 ##userDB: DAW
 ##passDB: nohay2sin3
-mailFrom: alumno1@iesquevedo.es
-smtpServer: smtp.gmail.com
-smtpPort: 587
-mailPass: alumnodam2
-duracion: 5
 ##passDB: clasesdaw
