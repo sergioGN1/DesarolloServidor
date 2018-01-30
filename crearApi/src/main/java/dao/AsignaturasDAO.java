@@ -59,7 +59,7 @@ public class AsignaturasDAO {
         return lista;
     }
 
-    public Asignatura insertAsignaturaDBUtils(Asignatura insertAsignatura) {
+    public int insertAsignaturaDBUtils(Asignatura insertAsignatura) {
         
         Connection con = null;
         BigInteger id = null;
@@ -77,10 +77,11 @@ public class AsignaturasDAO {
 
         } catch (Exception ex) {
             Logger.getLogger(AsignaturasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         } finally {
             DBConnection.getInstance().cerrarConexion(con);
         }
-        return insertAsignatura;
+        return 1;
 
     }
 

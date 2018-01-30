@@ -17,7 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Alumno;
 import model.Asignatura;
+import model.Insercion;
+import servicios.AlumnosServicios;
 import servicios.AsignaturasServicios;
 
 /**
@@ -36,76 +39,6 @@ public class Asignaturas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            AsignaturasServicios as = new AsignaturasServicios();
-            String accion = request.getParameter("accion");
-            
-            if(null == accion){
-                accion = "getall";
-            }
-            
-            switch (accion) {
-                case "getall":
-                    request.setAttribute("asignaturas", as.getAllAsignaturas());
-                    request.getRequestDispatcher("pintarListaAsignaturas.jsp").forward(request, response);
-                    break;
-                    
-                case "insert":
-                    Asignatura asig = as.recogidaParametros(request,response);
-                    int filaInsertada = 0;
-                    asig = as.addAsignatura(asig);
-                    List<Asignatura> asignaturas = new ArrayList();
-                    asignaturas.add(asig);
-                    request.setAttribute("filas_insertadas", filaInsertada);
-                    break;
-                    
-                case "update":
-                    Asignatura asigUpt = as.recogidaParametros(request, response);
-                    int filasActualizadas = 0;
-                    
-                    
-                    List<Asignatura> AsignaturasUpdate = new ArrayList();
-                    
-                    filasActualizadas = as.updateAsignatura(asigUpt);
-                    AsignaturasUpdate.add(asigUpt);
-                    request.setAttribute("filas_actualizadas", filasActualizadas);
-                    break;
-                    
-                case "delete":
-                    Asignatura asigBor = as.recogidaParametros(request, response);
-                    int filasBorradas = 0;
-                    
-                    
-                    filasBorradas = as.deleteAsignatura(asigBor);
-                    if(filasBorradas == -1){
-                        request.setAttribute("filasBorradas",filasBorradas);
-                        request.setAttribute("objetoBorrar", asigBor);
-                    }else{
-                        request.setAttribute("filasBorradas",filasBorradas);
-                    }
-                    
-                    
-                    request.setAttribute("filas_borradas", filasBorradas);
-                    break;
-                    
-                    
-                case "completeDelete":
-                    Asignatura asignaturaDC = as.recogidaParametros(request, response);
-                    int filasBorradasC = 0;
-                    filasBorradasC = as.completeDeleteAlumno(asignaturaDC);
-                    request.setAttribute("filas_borradas",filasBorradasC);
-                    break;
-                    
-                    
-            }
-            request.setAttribute("asignaturas", as.getAllAsignaturas());
-            request.getRequestDispatcher("pintarListaAsignaturas.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Asignaturas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -136,17 +69,41 @@ public class Asignaturas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getAttribute("json");
+                AsignaturasServicios as = new AsignaturasServicios();
+                Insercion insertado = new Insercion();
+                Asignatura asignatura = (Asignatura)request.getAttribute("asignatura");
+                if(as.updateAsignatura(asignatura)){
+                    insertado.setHecho(true);
+                }else{
+                    insertado.setHecho(false);
+                }
+                request.setAttribute("json", insertado);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp); //To change body of generated methods, choose Tools | Templates.
+                AsignaturasServicios as = new AsignaturasServicios();
+                Insercion insertado = new Insercion();
+                Asignatura asignatura = (Asignatura)req.getAttribute("asignatura");
+                if(as.deleteAsignatura(asignatura)){
+                    insertado.setHecho(true);
+                }else{
+                    insertado.setHecho(false);
+                }
+                req.setAttribute("json", insertado); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
+                AsignaturasServicios as = new AsignaturasServicios();
+                Insercion insertado = new Insercion();
+                Asignatura asignatura = (Asignatura)req.getAttribute("asignatura");
+                if(as.addAsignatura(asignatura)){
+                    insertado.setHecho(true);
+                }else{
+                    insertado.setHecho(false);
+                }
+                req.setAttribute("json", insertado);
     }
 
     /**

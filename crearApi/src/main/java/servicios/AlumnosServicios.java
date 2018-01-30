@@ -66,11 +66,14 @@ public class AlumnosServicios {
         }
     }
     
-    public int deleteAlumno(Alumno alumnoNuevo)
+    public boolean deleteAlumno(Alumno alumnoNuevo)
     {
         AlumnosDAO dao = new AlumnosDAO();
-        
-        return dao.deleteAlumnoJDBC(alumnoNuevo);
+        if(dao.deleteAlumnoJDBC(alumnoNuevo) == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     
 }

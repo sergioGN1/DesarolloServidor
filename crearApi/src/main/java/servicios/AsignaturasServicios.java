@@ -17,35 +17,7 @@ import model.Asignatura;
  * @author DAW
  */
 public class AsignaturasServicios {
-    public Long parseoId(String id){
-        long idParseado = 0;
-        idParseado = Long.parseLong(id);
-
-        return idParseado;
-    }
     
-    public Asignatura recogidaParametros(HttpServletRequest request, HttpServletResponse response){
-        Asignatura asignatura = new Asignatura();
-        String nombre = null, curso = null,idr = null, ciclo = null;
-        if (!"".equals(request.getParameter("nombre")) && request.getParameter("nombre")!=null) {
-            nombre = request.getParameter("nombre");
-            asignatura.setNombre(nombre);
-        }
-        if (!"".equals(request.getParameter("curso")) && request.getParameter("curso")!=null) {
-            curso = request.getParameter("curso");
-            asignatura.setCurso(curso);
-        }
-        
-        if (!"".equals(request.getParameter("id")) && request.getParameter("id")!=null) {
-            idr = request.getParameter("id");
-            asignatura.setId(parseoId(idr));
-        }
-        if (!"".equals(request.getParameter("ciclo")) && request.getParameter("ciclo")!=null) {
-            ciclo = request.getParameter("ciclo");
-            asignatura.setCiclo(ciclo);
-        }
-        return asignatura;
-    }
     
     public List<Asignatura> getAllAsignaturas()
     {
@@ -66,23 +38,32 @@ public class AsignaturasServicios {
         
         return dao.completeDeleteAsignatura(borradoCompleto);
     }
-    public Asignatura addAsignatura(Asignatura asignaturaNuevo)
+    public boolean addAsignatura(Asignatura asignaturaNuevo)
     {
         AsignaturasDAO dao = new AsignaturasDAO();
-        
-        return dao.insertAsignaturaDBUtils(asignaturaNuevo);
+        if( dao.insertAsignaturaDBUtils(asignaturaNuevo) == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     
-    public int updateAsignatura(Asignatura asignaturaNuevo)
+    public boolean updateAsignatura(Asignatura asignaturaNuevo)
     {
         AsignaturasDAO dao = new AsignaturasDAO();
-        
-        return dao.updateAsignaturaDBUtils(asignaturaNuevo);
+        if(dao.updateAsignaturaDBUtils(asignaturaNuevo) == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     
-    public int deleteAsignatura(Asignatura asignaturaNuevo){
+    public boolean deleteAsignatura(Asignatura asignaturaNuevo){
         AsignaturasDAO dao = new AsignaturasDAO();
-        
-        return dao.deleteAsignaturaDBUtils(asignaturaNuevo);
+        if(dao.deleteAsignaturaDBUtils(asignaturaNuevo) == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

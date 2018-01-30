@@ -45,21 +45,21 @@ public class FilterJson implements Filter {
             log("FilterJson:DoBeforeProcessing");
         }
         ObjectMapper mapper = new ObjectMapper();
-        if(request.getParameter("objeto") != null){
-            String alumno = request.getParameter("objeto");
+        if(request.getParameter("alumno") != null){
+            String alumno = request.getParameter("alumno");
                 Alumno a = mapper.readValue(alumno, new TypeReference<Alumno>() {
                 });
-                request.setAttribute("objeto", a);
-        } else if(request.getParameter("objeto") != null){
-            String asignatura = request.getParameter("objeto");
+                request.setAttribute("alumno", a);
+        } else if(request.getParameter("asignatura") != null){
+            String asignatura = request.getParameter("asignatura");
                 Alumno a = mapper.readValue(asignatura, new TypeReference<Asignatura>() {
                 });
-                request.setAttribute("objeto", a);
-        }else if(request.getParameter("objeto") != null){
-            String nota = request.getParameter("objeto");
+                request.setAttribute("asignatura", a);
+        }else if(request.getParameter("nota") != null){
+            String nota = request.getParameter("nota");
                 Alumno a = mapper.readValue(nota, new TypeReference<Nota>() {
                 });
-                request.setAttribute("objeto", a);
+                request.setAttribute("nota", a);
         }
         // Write code here to process the request and/or response before
         // the rest of the filter chain is invoked.

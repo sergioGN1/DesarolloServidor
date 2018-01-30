@@ -60,7 +60,15 @@ public class Alumnos extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+                AlumnosServicios as = new AlumnosServicios();
+                Insercion insertado = new Insercion();
+                Alumno alumnoI = (Alumno)req.getAttribute("alumno");
+                if(as.deleteAlumno(alumnoI)){
+                    insertado.setHecho(true);
+                }else{
+                    insertado.setHecho(false);
+                }
+                req.setAttribute("json", insertado);
     }
 
     /**
@@ -75,7 +83,7 @@ public class Alumnos extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
                 AlumnosServicios as = new AlumnosServicios();
                 Insercion insertado = new Insercion();
-                Alumno alumnoI = (Alumno)req.getAttribute("objeto");
+                Alumno alumnoI = (Alumno)req.getAttribute("alumno");
                 if(as.addAlumno(alumnoI)){
                     insertado.setHecho(true);
                 }else{
@@ -88,7 +96,7 @@ public class Alumnos extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 AlumnosServicios as = new AlumnosServicios();
                 Insercion insertado = new Insercion();
-                Alumno alumnoI = (Alumno)request.getAttribute("objeto");
+                Alumno alumnoI = (Alumno)request.getAttribute("alumno");
                 if(as.updateAlumno(alumnoI)){
                     insertado.setHecho(true);
                 }else{

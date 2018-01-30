@@ -50,7 +50,7 @@ public class NotasDAO {
           
             QueryRunner qr = new QueryRunner();
             ScalarHandler<Integer> i = new ScalarHandler<Integer>();
-            notaAlumno = qr.query(con, "SELECT NOTA FROM NOTAS WHERE ID_ALUMNO = ? AND ID_ASIGNATURA = ?",
+            notaAlumno = qr.query(con, "SELECT * FROM NOTAS WHERE ID_ALUMNO = ? AND ID_ASIGNATURA = ?",
                  i ,selectNota.getId_alumno(),selectNota.getId_asignatura());
             
             selectNota.setNota(notaAlumno);
@@ -63,7 +63,7 @@ public class NotasDAO {
         return selectNota.getNota();
     }
     
-    public Nota insertNotaDBUtils(Nota insertNota) {
+    public int insertNotaDBUtils(Nota insertNota) {
         Connection con = null;
 
         try {
@@ -82,11 +82,14 @@ public class NotasDAO {
             Logger.getLogger(NotasDAO.class.getName()).log(Level.SEVERE, null, ex);
             if(ex.toString().contains("Duplicate entry")){
                 insertNota = null;
+                return 0;
             }
+            
+            return 0;
         } finally {
             DBConnection.getInstance().cerrarConexion(con);
         }
-        return insertNota;
+        return 1;
 
     }
 
