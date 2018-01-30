@@ -43,8 +43,10 @@ $alumnosLista = $alumno->mostrarAlumnos();
                         ?>
                     </td>
                     <td>
-                        &#9998;
-                        &#9746;
+                        <div class="row">
+                            <div id="edit">&#9998;</div>
+                            <div id="delete">&#9746;</div>
+                        </div>
                     </td>
                 </tr>
             <?php } ?>
