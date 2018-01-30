@@ -10,8 +10,8 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <a href="vistas/vistaAlumno.php">Alumnos</a>
-        <a href="vistas/vistaAsignaturas.php">Asignaturas</a>
-        <a href="vistas/vistaNotas.php">Notas</a>
+        <?php
+        // put your code here
+        ?>
     </body>
 </html>
