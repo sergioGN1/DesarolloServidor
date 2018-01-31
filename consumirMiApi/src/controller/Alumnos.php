@@ -17,6 +17,23 @@ use GuzzleHttp\Client;
 
 class Alumnos {
 
+    function recogerParametros($id,$nombre,$fecha_nacimiento,$mayor_edad) {
+        $alumnoObjeto = new \stdClass;
+        if ($id != null) {
+            $alumnoObjeto->id = $id;
+        }
+        if ($nombre != null) {
+            $alumnoObjeto->nombre = $nombre;
+        }
+        if ($fecha_nacimiento != null) {
+            $alumnoObjeto->fecha_nacimiento = $fecha_nacimiento;
+        }
+        if ($mayor_edad != null) {
+            $alumnoObjeto->mayor_edad = $mayor_edad;
+        }
+        return $alumnoObjeto;
+    }
+
     function mostrarAlumnos() {
         $client = new Client();
 

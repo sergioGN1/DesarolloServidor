@@ -17,19 +17,39 @@ use GuzzleHttp\Client;
 
 class Asignaturas {
 
+    function recogerParametros($id, $nombre, $curso, $ciclo) {
+        $asignaturaObjeto = new \stdClass;
+        if ($id != null) {
+            $asignaturaObjeto->id = $id;
+        }
+        if ($nombre != null) {
+            $asignaturaObjeto->nombre = $nombre;
+        }
+        if ($curso != null) {
+            $asignaturaObjeto->curso = $curso;
+        }
+        if ($ciclo != null) {
+            $asignaturaObjeto->ciclo = $ciclo;
+        }
+        return $asignaturaObjeto;
+    }
+
     function mostrarAsignaturas() {
         $client = new Client();
 
-        $uri = 'http://localhost:8080/crearApi/rest/alumnos';
-        $response = $client->get($uri, $header);
+        $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
+        $response = $client->get($uri);
         $json = json_decode($response->getBody());
         return $json;
     }
 
     function insertarAsignaturas($asignatura) {
+        $client = new Client();
+
+        $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
         $response = $client->put($uri, [
             'query' => [
-                'alumno' => json_encode($alumno)
+                'alumno' => json_encode($asignatura)
             ]
         ]);
     }
@@ -37,11 +57,11 @@ class Asignaturas {
     function borrarAsignaturas($asignatura) {
         $client = new Client();
 
-        $uri = 'http://localhost:8080/crearApi/rest/alumnos';
+        $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
         try {
             $response = $client->delete($uri, [
                 'query' => [
-                    'alumno' => json_encode($alumno)
+                    'alumno' => json_encode($asignatura)
                 ]
             ]);
         } catch (ClientException $exception) {
@@ -52,9 +72,12 @@ class Asignaturas {
     }
 
     function updateAsignaturas($asignatura) {
+        $client = new Client();
+
+        $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
         $response = $client->post($uri, [
             'form_params' => [
-                'alumno' => json_encode($alumno)
+                'alumno' => json_encode($asignatura)
             ]
         ]);
     }

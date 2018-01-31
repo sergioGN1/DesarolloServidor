@@ -11,7 +11,7 @@ $alumnosLista = $alumno->mostrarAlumnos();
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>CRUD Alumnos</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
@@ -50,6 +50,9 @@ $alumnosLista = $alumno->mostrarAlumnos();
                     </td>
                 </tr>
             <?php } ?>
+            <tr>
+                <td rowspan="3"><button>Añadir Alumnos</button></td>
+            </tr>
         </table>
     </body>
 </html>
