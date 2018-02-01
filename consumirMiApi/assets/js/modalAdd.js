@@ -4,7 +4,7 @@ $(document).ready(function () {
     });
     $(".close").click(function(){
         $("#addA").css("display","none");
-    });
+    }); 
 });
 
 

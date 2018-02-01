@@ -44,6 +44,8 @@ class Alumnos {
     }
 
     function insertarAlumnos($alumno) {
+        $client = new Client();
+        $uri = 'http://localhost:8080/crearApi/rest/alumnos';
         $response = $client->put($uri, [
             'query' => [
                 'alumno' => json_encode($alumno)
@@ -65,10 +67,12 @@ class Alumnos {
             echo $exception->getCode();
             $alumno = json_decode($exception->getResponse()->getBody());
         }
-        return $json;
     }
 
     function updateAlumno($alumno) {
+        $client = new Client();
+
+        $uri = 'http://localhost:8080/crearApi/rest/alumnos';
         $response = $client->post($uri, [
             'form_params' => [
                 'alumno' => json_encode($alumno)
