@@ -46,7 +46,7 @@ $asignaturaLista = $asignatura->mostrarAsignaturas();
                 </tr>
             <?php } ?>
             <tr>
-                <td rowspan="3"><button>Añadir Asignatura</button></td>
+                <td colspan="4"><button class="col-12 btn btn-secondary" id="add">Añadir Asignatura</button></td>
             </tr>
         </table>
     </body>

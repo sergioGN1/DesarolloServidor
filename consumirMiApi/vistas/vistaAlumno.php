@@ -14,6 +14,9 @@ $alumnosLista = $alumno->mostrarAlumnos();
         <title>CRUD Alumnos</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="../assets/js/modalAdd.js"></script>
+        <link rel="stylesheet" href="../assets/css/modales.css">
+        <link rel="stylesheet" href="../assets/css/checkboxes.css">
     </head>
     <body>
         <table class="table table-striped">
@@ -36,9 +39,15 @@ $alumnosLista = $alumno->mostrarAlumnos();
                     </td>
                     <td>
                         <?php if ($alumnos->mayor_edad == 1) { ?>
-                            <input type="checkbox" checked="checked">
+                            <label class="container">
+                                <input type="checkbox" checked="checked" disabled>
+                                <span class="checkmark"></span>
+                            </label>
                         <?php } else { ?>
-                            <input type="checkbox"><?php
+                            <label class="container">
+                                <input type="checkbox" disabled>
+                                <span class="checkmark"></span>
+                            </label><?php
                         }
                         ?>
                     </td>
@@ -50,10 +59,27 @@ $alumnosLista = $alumno->mostrarAlumnos();
                     </td>
                 </tr>
             <?php } ?>
+
             <tr>
-                <td rowspan="3"><button>Añadir Alumnos</button></td>
+                <td colspan="4"><button class="col-12 btn btn-secondary" id="add">Añadir Alumno</button></td>
             </tr>
-        </table>
+        </table>    
+        <div id="addA" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form action="../frontController.php" name="addAlumno">
+                    <input type="hidden" name="tipo" value="alumno">
+                    <input type="text" placeholder="Nombre del Alumno" class="col-12">
+                    <input type="date" name="fecha_nacimiento" class="col-12">
+                    <label>Mayor Edad<input type="checkbox" name="mayor_edad"></label>
+                    <button name="op" value="insertar" required>Enviar</button>
+                </form>
+            </div>
+
+        </div>
+
+
     </body>
 </html>
-
