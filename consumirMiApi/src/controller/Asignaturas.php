@@ -49,7 +49,7 @@ class Asignaturas {
         $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
         $response = $client->put($uri, [
             'query' => [
-                'alumno' => json_encode($asignatura)
+                'asignatura' => json_encode($asignatura)
             ]
         ]);
     }
@@ -61,14 +61,14 @@ class Asignaturas {
         try {
             $response = $client->delete($uri, [
                 'query' => [
-                    'alumno' => json_encode($asignatura)
+                    'asignatura' => json_encode($asignatura)
                 ]
             ]);
         } catch (ClientException $exception) {
             echo $exception->getCode();
             $alumno = json_decode($exception->getResponse()->getBody());
         }
-        return $json;
+        
     }
 
     function updateAsignaturas($asignatura) {
@@ -77,7 +77,7 @@ class Asignaturas {
         $uri = 'http://localhost:8080/crearApi/rest/asignaturas';
         $response = $client->post($uri, [
             'form_params' => [
-                'alumno' => json_encode($asignatura)
+                'asignatura' => json_encode($asignatura)
             ]
         ]);
     }

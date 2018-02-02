@@ -64,15 +64,12 @@ $alumnosLista = $alumno->mostrarAlumnos();
                     </td>
                     <td>
                         <div class="row">
-                            <div class="edit">&#9998;</div>
-                            <div class="delete">&#9746;
-                                <form action="../frontController.php" class="formulario">
+                            <div class="edit" data-edit="<?php echo $alumnos->id;?>">&#9998;</div>
+                            <div class="delete" data-delete="<?php echo $alumnos->id;?>">&#9746;
+                                <form action="../frontController.php" id="formulario<?php echo $alumnos->id;?>">
                                     <input type="hidden" name="op" value="delete">
                                     <input type="hidden" name="tipo" value="alumno">
                                     <input type="hidden" name="id" value="<?php echo $alumnos->id;?>">
-                                    <input type="hidden" name="name" value="<?php echo $alumnos->nombre;?>">
-                                    <input type="hidden" name="fecha_nacimiento" value="<?php echo $alumnos->fecha_nacimiento;?>">
-                                    <input type="hidden" name="mayor_edad" value="<?php echo $alumnos->mayor_edad;?>">
                                 </form>
                             </div>
                         </div>
@@ -93,8 +90,11 @@ $alumnosLista = $alumno->mostrarAlumnos();
                     <input type="hidden" name="tipo" value="alumno">
                     <input type="text" name="nombre" placeholder="Nombre del Alumno" class="col-12">
                     <input type="date" name="fecha_nacimiento" class="col-12">
-                    <label>Mayor Edad<input type="checkbox" name="mayor_edad"></label>
-                    <button name="op" value="insertar" required>Enviar</button>
+                    <label class="container">Mayor Edad
+                        <input type="checkbox" name="mayor_edad">
+                        <span class="checkmark"></span>
+                    </label>
+                    <button name="op" value="insertar" class="col-12 btn btn-secondary">Enviar</button>
                 </form>
             </div>
 
@@ -104,12 +104,17 @@ $alumnosLista = $alumno->mostrarAlumnos();
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form action="../frontController.php" name="addAlumno">
+                <form action="../frontController.php" id="updateAlumno">
                     <input type="hidden" name="tipo" value="alumno">
+                    <input type="hidden" name="op" value="update">
+                    <input type="hidden" name="id" value="" id="idUpdate">
                     <input type="text" name="nombre" placeholder="Nombre del Alumno" class="col-12">
                     <input type="date" name="fecha_nacimiento" class="col-12">
-                    <label>Mayor Edad<input type="checkbox" name="mayor_edad"></label>
-                    <button name="op" value="actualizar" required>Enviar</button>
+                    <label class="container">Mayor Edad
+                        <input type="checkbox" name="mayor_edad">
+                        <span class="checkmark"></span>
+                    </label>
+                    <button name="op" value="actualizar" id="enviar" class="col-12 btn btn-secondary">Enviar</button>
                 </form>
             </div>
 

@@ -14,7 +14,6 @@ namespace controller;
  * @author DAW
  */
 use GuzzleHttp\Client;
-
 class Alumnos {
 
     function recogerParametros($id,$nombre,$fecha_nacimiento,$mayor_edad) {
@@ -28,8 +27,10 @@ class Alumnos {
         if ($fecha_nacimiento != null) {
             $alumnoObjeto->fecha_nacimiento = $fecha_nacimiento;
         }
-        if ($mayor_edad != null) {
-            $alumnoObjeto->mayor_edad = $mayor_edad;
+        if ($mayor_edad == null) {
+            $alumnoObjeto->mayor_edad = false;
+        } else {
+            $alumnoObjeto->mayor_edad = true;
         }
         return $alumnoObjeto;
     }

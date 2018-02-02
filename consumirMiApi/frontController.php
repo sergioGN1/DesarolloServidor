@@ -26,32 +26,44 @@ if ($tipo == "alumno") {
             $alumnoRecogido = $alumnoOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["fecha_nacimiento"], true);
         }
         $alumnoOb->insertarAlumnos($alumnoRecogido);
+        
+        
     } else if ($op == "delete") {
+        
         $alumnoRecogido = $alumnoOb->recogerParametros($_REQUEST["id"], "", "", "");
         $alumnoOb->borrarAlumnos($alumnoRecogido);
-    } else if ($op == "actualizar") {
         
+    } else if ($op == "actualizar") {
+
         if (!isset($_REQUEST["mayor_edad"])) {
             $alumnoRecogido = $alumnoOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["fecha_nacimiento"], false);
         } else if ($_REQUEST["mayor_edad"] == "on") {
             $alumnoRecogido = $alumnoOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["fecha_nacimiento"], true);
         }
-        
+
         $alumnoOb->updateAlumno($alumnoRecogido);
     }
+    
+    
 } else if ($tipo == "asignatura") {
     if (!isset($_REQUEST["id"])) {
         $_REQUEST["id"] = 0;
     }
-    $asignaturaRecogido = $asignaturasOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["curso"], $_REQUEST["ciclo"]);
+    
 
     if ($op == "insertar") {
+        $asignaturaRecogido = $asignaturasOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["curso"],$_REQUEST["ciclo"]);
         $asignaturasOb->insertarAsignaturas($asignaturaRecogido);
-    } else if ($op == "borrar") {
+    } else if ($op == "delete") {
+        $asignaturaRecogido = $asignaturasOb->recogerParametros($_REQUEST["id"], "", "","");
+        
         $asignaturasOb->borrarAsignaturas($asignaturaRecogido);
     } else if ($op == "actualizar") {
+        $asignaturaRecogido = $asignaturasOb->recogerParametros($_REQUEST["id"], $_REQUEST["nombre"], $_REQUEST["curso"],$_REQUEST["ciclo"]);
         $asignaturasOb->updateAsignaturas($asignaturaRecogido);
     }
+
+    
 } else if ($tipo == "notas") {
     $notaRecogida = $notasOb->recogerParametros($_REQUEST["id_alumno"], $_REQUEST["id_asignatura"], $_REQUEST["nota"]);
 
